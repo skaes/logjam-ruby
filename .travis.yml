@@ -1,0 +1,29 @@
+dist: xenial
+language: ruby
+rvm:
+- 2.6.5
+before_script:
+- echo -e "Host railsexpress.de\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- eval "$(ssh-agent -s)"
+- chmod 600 ./railsexpress-key
+- ssh-add ./railsexpress-key
+- cat ./docker-token | docker login -u stkaes --password-stdin
+services:
+- docker
+before_install:
+- openssl aes-256-cbc -K $encrypted_5944808d20a9_key -iv $encrypted_5944808d20a9_iv -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar
+jobs:
+  include:
+    - script:
+        - docker pull ubuntu:bionic
+        - make container-bionic package-bionic push-bionic publish-bionic
+    - script:
+        - docker pull ubuntu:xenial
+        - make container-xenial package-xenial push-xenial publish-xenial
+    - script:
+        - docker pull ubuntu:bionic
+        - make container-bionic-usr-local package-bionic-usr-local push-bionic-usr-local publish-bionic
+    - script:
+        - docker pull ubuntu:xenial
+        - make container-xenial-usr-local package-xenial-usr-local push-xenial-usr-local publish-xenial
