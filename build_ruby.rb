@@ -64,7 +64,7 @@ run "./configure", "--prefix=#{prefix}", "--with-opt-dir=#{prefix}",
 run "make", "-j4"
 run "make", "install"
 run "cd", ".."
-run "mkdir", "#{prefix}/etc"
+run "mkdir", "-p", "#{prefix}/etc"
 run "cp", ".gemrc", "#{prefix}/etc/gemrc"
 # install 1.x version of bundler to allow older Gemfile.locks to work
 run "#{prefix}/bin/gem", "install", "bundler", "-v", "1.17.3"
