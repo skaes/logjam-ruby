@@ -10,7 +10,7 @@ iteration "1"
 
 vendor "skaes@railsexpress.de"
 
-source "https://#{ENV['LOGJAM_PACKAGE_HOST']}/downloads/ruby-2.7.0-p0.tar.gz",
+source "https://railsexpress.de/downloads/ruby-2.7.0-p0.tar.gz",
        checksum: '01a73f9a52973a78eb7040ba2d7969e7e9868105bfa8a9a14309a933d8c393ce'
 
 build_depends "autoconf"
