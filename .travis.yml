@@ -17,13 +17,13 @@ jobs:
   include:
     - script:
         - docker pull ubuntu:bionic
-        - make container-bionic package-bionic push-bionic publish-bionic
+        - make package-bionic publish-bionic
     - script:
         - docker pull ubuntu:xenial
-        - make container-xenial package-xenial push-xenial publish-xenial
+        - make package-xenial publish-xenial
     - script:
         - docker pull ubuntu:bionic
-        - make container-bionic-usr-local package-bionic-usr-local push-bionic-usr-local publish-bionic
+        - make package-bionic-usr-local publish-bionic
     - script:
         - docker pull ubuntu:xenial
-        - make container-xenial-usr-local package-xenial-usr-local push-xenial-usr-local publish-xenial
+        - make package-xenial-usr-local publish-xenial
