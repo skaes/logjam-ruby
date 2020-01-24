@@ -5,8 +5,10 @@ if prefix == "/opt/logjam"
 else
   name "railsexpress-ruby"
 end
-version "2.7.0"
-iteration "1"
+
+v, i = File.read(File.expand_path(__dir__)+"/VERSION").chomp.split('-')
+version v
+iteration i
 
 vendor "skaes@railsexpress.de"
 
