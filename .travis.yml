@@ -23,7 +23,7 @@ jobs:
         - make package-xenial publish-xenial
     - script:
         - docker pull ubuntu:bionic
-        - make package-bionic-usr-local publish-bionic
+        - make package-bionic-usr-local publish-bionic-usr-local
     - script:
         - docker pull ubuntu:xenial
-        - make package-xenial-usr-local publish-xenial
+        - make package-xenial-usr-local publish-xenial-usr-local
