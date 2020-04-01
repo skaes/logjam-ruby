@@ -12,8 +12,9 @@ iteration i
 
 vendor "skaes@railsexpress.de"
 
-source "https://railsexpress.de/downloads/ruby-2.7.0-p0.tar.gz",
-       checksum: '01a73f9a52973a78eb7040ba2d7969e7e9868105bfa8a9a14309a933d8c393ce'
+patchlevel = 83
+source "https://railsexpress.de/downloads/ruby-2.7.1-p#{patchlevel}.tar.gz",
+       checksum: 'a999f4548ecaced87cefa233a56d20bfd00bc9b7edb299d8b30ae5711e56790f'
 
 build_depends "autoconf"
 build_depends "automake"
@@ -60,7 +61,7 @@ depends "zlib1g"
 
 add "gemrc", ".gemrc"
 
-run "cd", "ruby-2.7.0-p0"
+run "cd", "ruby-2.7.0-p#{patchlevel}"
 run "./configure", "--prefix=#{prefix}", "--with-opt-dir=#{prefix}",
      "--with-out-ext=tcl", "--with-out-ext=tk", "--disable-install-doc", "--enable-shared"
 run "make", "-j4"
