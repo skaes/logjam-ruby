@@ -15,15 +15,27 @@ before_install:
 - tar xvf secrets.tar
 jobs:
   include:
-    - script:
+    - name: focal
+      script:
+        - docker pull ubuntu:focal
+        - make package-focal publish-focal
+    - name: bionic
+      script:
         - docker pull ubuntu:bionic
         - make package-bionic publish-bionic
-    - script:
+    - name: xenial
+      script:
         - docker pull ubuntu:xenial
         - make package-xenial publish-xenial
-    - script:
+    - name: focal-usr-local
+      script:
+        - docker pull ubuntu:focal
+        - make package-focal-usr-local publish-focal-usr-local
+    - name: bionic-usr-local
+      script:
         - docker pull ubuntu:bionic
         - make package-bionic-usr-local publish-bionic-usr-local
-    - script:
+    - name: xenial-usr-local
+      script:
         - docker pull ubuntu:xenial
         - make package-xenial-usr-local publish-xenial-usr-local

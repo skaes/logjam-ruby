@@ -25,12 +25,13 @@ build_depends "curl"
 build_depends "gawk"
 build_depends "libffi-dev"
 build_depends "libgdbm-dev"
-if codename == "bionic"
+
+if codename == "bionic" || codename == "focal"
   build_depends "libgdbm-compat-dev"
 end
 build_depends "libgmp-dev"
 build_depends "libncurses5-dev"
-if codename == "bionic"
+if codename == "bionic" || codename == "focal"
   build_depends "libreadline-dev"
 else
   build_depends "libreadline6-dev"
@@ -44,14 +45,22 @@ build_depends "ruby"
 build_depends "zlib1g-dev"
 
 depends "libc6"
-depends "libffi6"
-if codename == "bionic"
+if codename == "focal"
+  depends "libffi7"
+else
+  depends "libffi6"
+end
+if codename == "focal"
+  depends "libgdbm6"
+elsif codename == "bionic"
   depends "libgdbm5"
 else
   depends "libgdbm3"
 end
 depends "libgmp10"
-if codename == "bionic"
+if codename == "focal"
+  depends "libreadline8"
+elsif codename == "bionic"
   depends "libreadline7"
 else
   depends "libreadline6"
