@@ -12,10 +12,10 @@ iteration i
 
 vendor "skaes@railsexpress.de"
 
-ruby_version = "2.7.1"
-patchlevel = 83
+ruby_version = "2.7.2"
+patchlevel = 137
 source "https://railsexpress.de/downloads/ruby-#{ruby_version}-p#{patchlevel}.tar.gz",
-       checksum: 'a999f4548ecaced87cefa233a56d20bfd00bc9b7edb299d8b30ae5711e56790f'
+       checksum: '5d05345083c2bc7997d964e434bff34fc502a8e4c9ab0018687eba42bc6a61a1'
 
 build_depends "autoconf"
 build_depends "automake"
