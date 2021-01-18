@@ -12,10 +12,10 @@ iteration i
 
 vendor "skaes@railsexpress.de"
 
-ruby_version = "2.7.2"
-patchlevel = 137
+ruby_version = "3.0.0"
+patchlevel = 0
 source "https://railsexpress.de/downloads/ruby-#{ruby_version}-p#{patchlevel}.tar.gz",
-       checksum: '5d05345083c2bc7997d964e434bff34fc502a8e4c9ab0018687eba42bc6a61a1'
+       checksum: '0eb97ff46e66e09e31a6e45c75574fa210414f2acf474e283dbe51bddfa607be'
 
 build_depends "autoconf"
 build_depends "automake"
@@ -79,10 +79,8 @@ run "make", "install"
 run "cd", ".."
 run "mkdir", "-p", "#{prefix}/etc"
 run "cp", ".gemrc", "#{prefix}/etc/gemrc"
-# install 1.x version of bundler to allow older Gemfile.locks to work
-run "#{prefix}/bin/gem", "install", "bundler", "-v", "1.17.3"
-# run "/opt/logjam/bin/gem", "install", "bundler", "-v", "2.1.2"
-# run "/opt/logjam/bin/gem", "update", "-q", "--system", "3.1.2"
+run "/opt/logjam/bin/gem", "install", "bundler", "-v", "2.2.5"
+run "/opt/logjam/bin/gem", "update", "-q", "--system", "3.2.5"
 
 plugin "exclude"
 exclude "/root/**"
