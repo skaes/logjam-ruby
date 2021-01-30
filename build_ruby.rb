@@ -79,8 +79,9 @@ run "make", "install"
 run "cd", ".."
 run "mkdir", "-p", "#{prefix}/etc"
 run "cp", ".gemrc", "#{prefix}/etc/gemrc"
-run "#{prefix}/bin/gem", "install", "bundler", "-v", "2.2.5"
-run "#{prefix}/bin/gem", "update", "-q", "--system", "3.2.5"
+run "#{prefix}/bin/gem", "update", "-q", "--system", "3.2.7"
+# we already get the bundler 2.2.7 with the previous command
+# run "#{prefix}/bin/gem", "install", "bundler", "-v", "2.2.5"
 
 plugin "exclude"
 exclude "/root/**"
