@@ -12,10 +12,10 @@ iteration i
 
 vendor "skaes@railsexpress.de"
 
-ruby_version = "3.0.0"
-patchlevel = 0
+ruby_version = "3.0.1"
+patchlevel = 64
 source "https://railsexpress.de/downloads/ruby-#{ruby_version}-p#{patchlevel}.tar.gz",
-       checksum: '0eb97ff46e66e09e31a6e45c75574fa210414f2acf474e283dbe51bddfa607be'
+       checksum: 'fc95cb173b54143646b02611372bc5d66f235941140270af32674522eeb75bf3'
 
 build_depends "autoconf"
 build_depends "automake"
@@ -79,9 +79,7 @@ run "make", "install"
 run "cd", ".."
 run "mkdir", "-p", "#{prefix}/etc"
 run "cp", ".gemrc", "#{prefix}/etc/gemrc"
-run "#{prefix}/bin/gem", "update", "-q", "--system", "3.2.7"
-# we already get the bundler 2.2.7 with the previous command
-# run "#{prefix}/bin/gem", "install", "bundler", "-v", "2.2.5"
+run "#{prefix}/bin/gem", "update", "-q", "--system", "3.2.16"
 
 plugin "exclude"
 exclude "/root/**"
