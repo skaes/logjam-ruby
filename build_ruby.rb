@@ -12,10 +12,10 @@ iteration i
 
 vendor "skaes@railsexpress.de"
 
-ruby_version = "3.0.1"
-patchlevel = 64
+ruby_version = "3.0.2"
+patchlevel = 107
 source "https://railsexpress.de/downloads/ruby-#{ruby_version}-p#{patchlevel}.tar.gz",
-       checksum: '3937ced2f5e55b9e30cc2b92fe6f025e7e185007c861bfabf8896473c434250e'
+       checksum: '1d2b285d2ac292d1096fa23930565580c19de36ff23a3976e72788b0510b905e'
 
 build_depends "autoconf"
 build_depends "automake"
@@ -79,7 +79,7 @@ run "make", "install"
 run "cd", ".."
 run "mkdir", "-p", "#{prefix}/etc"
 run "cp", ".gemrc", "#{prefix}/etc/gemrc"
-run "#{prefix}/bin/gem", "update", "-q", "--system", "3.2.16"
+run "#{prefix}/bin/gem", "update", "-q", "--system", "3.2.24"
 
 plugin "exclude"
 exclude "/root/**"
