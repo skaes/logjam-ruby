@@ -1,8 +1,11 @@
 # logjam-ruby
 
-Build ruby package for logjam pipeline. Supports Ubuntu Bionic and Xenial and provides two
+Build ruby package for logjam pipeline. Supports Ubuntu Focal, Bionic and Xenial and provides two
 different packages: `logjam-ruby_x.x.x_x_amd64.deb` installs in `/opt/logjam` and
 `railsexpress-ruby_x.x.x-x_amd64.deb` installs in `/usr/local`.
+
+[![build](https://github.com/skaes/logjam-ruby/actions/workflows/build.yml/badge.svg)](https://github.com/skaes/logjam-ruby/actions/workflows/build.yml)
+
 
 ## Releasing a new version
 
