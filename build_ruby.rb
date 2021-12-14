@@ -72,6 +72,7 @@ depends "zlib1g"
 add "gemrc", ".gemrc"
 
 run "cd", "ruby-#{ruby_version}-p#{patchlevel}"
+run "autoconf"
 run "./configure", "--prefix=#{prefix}", "--with-opt-dir=#{prefix}",
      "--with-out-ext=tcl", "--with-out-ext=tk", "--disable-install-doc", "--enable-shared"
 run "make", "-j4"
