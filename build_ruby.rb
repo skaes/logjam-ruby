@@ -15,7 +15,7 @@ vendor "skaes@railsexpress.de"
 ruby_version = "3.1.0"
 patchlevel = 0
 source "https://railsexpress.de/downloads/ruby-#{ruby_version}-p#{patchlevel}.tar.gz",
-       checksum: 'a0583e919d1bddc0448b2f908c252c5636801da436ea61f1b9436d4a9e12e1f6'
+       checksum: 'a115eaba80356398f64d471057876e9d0a8f3142c78a99fa56ed0529bc41732b'
 
 build_depends "autoconf"
 build_depends "automake"
