@@ -12,10 +12,9 @@ iteration i
 
 vendor "skaes@railsexpress.de"
 
-ruby_version = "3.1.1"
-patchlevel = 18
-source "https://railsexpress.de/downloads/ruby-#{ruby_version}-p#{patchlevel}.tar.gz",
-       checksum: 'be4e82664fcb289a957d44bbe851d5adbd7871441ed815b42bcbb880414109d4'
+patchlevel = 20
+source "https://railsexpress.de/downloads/ruby-#{version}-p#{patchlevel}.tar.gz",
+       checksum: '0e1d6325db99aec0788cb25d5bdbf64930087046bd514f0a72f40ac6311fe58d'
 
 build_depends "autoconf"
 build_depends "automake"
@@ -71,7 +70,7 @@ depends "zlib1g"
 
 add "gemrc", ".gemrc"
 
-run "cd", "ruby-#{ruby_version}-p#{patchlevel}"
+run "cd", "ruby-#{version}-p#{patchlevel}"
 run "autoconf"
 run "./configure", "--prefix=#{prefix}", "--with-opt-dir=#{prefix}",
      "--with-out-ext=tcl", "--with-out-ext=tk", "--disable-install-doc", "--enable-shared"
