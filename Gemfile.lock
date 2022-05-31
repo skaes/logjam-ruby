@@ -1,12 +1,11 @@
 GIT
   remote: https://github.com/skaes/fpm-fry.git
-  revision: 9b6448fddb4e82a13dc2a8992ccfb47805146bea
-  branch: experimental
+  revision: 3c5f92efff4961e981b781e7385a648b186f83c0
+  branch: support-file-modifications
   specs:
-    fpm-fry (0.2.1)
-      excon (~> 0.30)
-      fpm (~> 1.0)
-      json (~> 1.8)
+    fpm-fry (0.5.0)
+      excon (~> 0.71)
+      fpm (~> 1.13)
 
 GEM
   remote: https://rubygems.org/
@@ -32,7 +31,7 @@ GEM
     git (1.11.0)
       rchardet (~> 1.8)
     insist (1.0.0)
-    json (1.8.6)
+    json (2.6.2)
     mustache (0.99.8)
     pleaserun (0.0.32)
       cabin (> 0)
