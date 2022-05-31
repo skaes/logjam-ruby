@@ -70,17 +70,17 @@ depends "zlib1g"
 
 add "gemrc", ".gemrc"
 
-run "cd", "ruby-#{version}-p#{patchlevel}"
 run "autoconf"
 run "./configure", "--prefix=#{prefix}", "--with-opt-dir=#{prefix}",
      "--with-out-ext=tcl", "--with-out-ext=tk", "--disable-install-doc", "--enable-shared"
 run "make", "-j4"
 run "make", "install"
-run "cd", ".."
 run "mkdir", "-p", "#{prefix}/etc"
 run "cp", ".gemrc", "#{prefix}/etc/gemrc"
 run "#{prefix}/bin/gem", "update", "-q", "--system", "3.3.14"
 
 plugin "exclude"
+exclude "/root"
 exclude "/root/**"
+exclude "/opt/hostedtoolcache"
 exclude "/opt/hostedtoolcache/**"
