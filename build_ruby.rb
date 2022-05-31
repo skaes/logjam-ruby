@@ -79,7 +79,7 @@ run "make", "install"
 run "cd", ".."
 run "mkdir", "-p", "#{prefix}/etc"
 run "cp", ".gemrc", "#{prefix}/etc/gemrc"
-run "#{prefix}/bin/gem", "update", "-q", "--system", "3.3.9"
+run "#{prefix}/bin/gem", "update", "-q", "--system", "3.3.14"
 
 plugin "exclude"
 exclude "/root/**"
