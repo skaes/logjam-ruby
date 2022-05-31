@@ -83,3 +83,4 @@ run "#{prefix}/bin/gem", "update", "-q", "--system", "3.3.9"
 
 plugin "exclude"
 exclude "/root/**"
+exclude "/opt/hostedtoolcache/**"
