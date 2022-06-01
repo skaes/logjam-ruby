@@ -70,16 +70,27 @@ depends "zlib1g"
 
 add "gemrc", ".gemrc"
 
-run "cd", "ruby-#{version}-p#{patchlevel}"
 run "autoconf"
 run "./configure", "--prefix=#{prefix}", "--with-opt-dir=#{prefix}",
      "--with-out-ext=tcl", "--with-out-ext=tk", "--disable-install-doc", "--enable-shared"
 run "make", "-j4"
 run "make", "install"
-run "cd", ".."
 run "mkdir", "-p", "#{prefix}/etc"
 run "cp", ".gemrc", "#{prefix}/etc/gemrc"
-run "#{prefix}/bin/gem", "update", "-q", "--system", "3.3.9"
+run "#{prefix}/bin/gem", "update", "-q", "--system", "3.3.14"
 
 plugin "exclude"
+
+# The rubygems update installs gem info in '/root/.local'. Excluding
+# '/root/**' is not enough, as it does not match '/root'.
+exclude "/root"
 exclude "/root/**"
+
+# Github actions install ruby in /opt/hostedtoolcache and for some
+# reason it gets modified.
+exclude "/opt/hostedtoolcache"
+exclude "/opt/hostedtoolcache/**"
+
+# When running in a tty, tzdata asks for the time zone and the next
+# line fixes that problem.
+plugin "env", "DEBIAN_FRONTEND" => "noninteractive"
