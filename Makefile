@@ -11,25 +11,23 @@ PACKAGES:=package-focal package-focal-usr-local package-bionic package-bionic-us
 
 packages: $(PACKAGES)
 
-package-focal:
-	LOGJAM_PREFIX=/opt/logjam bundle exec fpm-fry cook --update=always ubuntu:focal build_ruby.rb
-	mkdir -p packages/ubuntu/focal && mv *.deb packages/ubuntu/focal
-package-bionic:
-	LOGJAM_PREFIX=/opt/logjam bundle exec fpm-fry cook --update=always ubuntu:bionic build_ruby.rb
-	mkdir -p packages/ubuntu/bionic && mv *.deb packages/ubuntu/bionic
-package-xenial:
-	LOGJAM_PREFIX=/opt/logjam bundle exec fpm-fry cook --update=always ubuntu:xenial build_ruby.rb
-	mkdir -p packages/ubuntu/xenial && mv *.deb packages/ubuntu/xenial
-package-focal-usr-local:
-	LOGJAM_PREFIX=/usr/local bundle exec fpm-fry cook --update=always ubuntu:focal build_ruby.rb
-	mkdir -p packages/ubuntu/focal && mv *.deb packages/ubuntu/focal
-package-bionic-usr-local:
-	LOGJAM_PREFIX=/usr/local bundle exec fpm-fry cook --update=always ubuntu:bionic build_ruby.rb
-	mkdir -p packages/ubuntu/bionic && mv *.deb packages/ubuntu/bionic
-package-xenial-usr-local:
-	LOGJAM_PREFIX=/usr/local bundle exec fpm-fry cook --update=always ubuntu:xenial build_ruby.rb
-	mkdir -p packages/ubuntu/xenial && mv *.deb packages/ubuntu/xenial
+define build-package
+  LOGJAM_PREFIX=$(2) RUBYOPT='-W0' bundle exec fpm-fry cook --update=always ubuntu:$(1) build_ruby.rb
+  mkdir -p packages/ubuntu/$(1) && mv *.deb packages/ubuntu/$(1)
+endef
 
+package-focal:
+	$(call build-package,focal,/opt/logjam)
+package-bionic:
+	$(call build-package,bionic,/opt/logjam)
+package-xenial:
+	$(call build-package,xenial,/opt/logjam)
+package-focal-usr-local:
+	$(call build-package,focal,/usr/local)
+package-bionic-usr-local:
+	$(call build-package,bionic,/usr/local)
+package-xenial-usr-local:
+	$(call build-package,xenial,/usr/local)
 
 LOGJAM_PACKAGE_HOST:=railsexpress.de
 LOGJAM_PACKAGE_USER:=uploader
