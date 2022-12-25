@@ -67,7 +67,11 @@ depends "zlib1g"
 
 add "gemrc", ".gemrc"
 
-run "autoconf"
+if codename == "jammy"
+  run "autoreconf", "-i"
+else
+  run "autoconf"
+end
 run "./configure", "--prefix=#{prefix}", "--with-opt-dir=#{prefix}",
      "--with-out-ext=tcl", "--with-out-ext=tk", "--disable-install-doc", "--enable-shared", "--enable-yjit"
 run "make", "-j4"
