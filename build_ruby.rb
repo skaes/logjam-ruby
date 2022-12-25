@@ -25,16 +25,10 @@ build_depends "gawk"
 build_depends "libffi-dev"
 build_depends "libgdbm-dev"
 
-if codename == "bionic" || codename == "focal"
-  build_depends "libgdbm-compat-dev"
-end
+build_depends "libgdbm-compat-dev"
 build_depends "libgmp-dev"
 build_depends "libncurses5-dev"
-if codename == "bionic" || codename == "focal"
-  build_depends "libreadline-dev"
-else
-  build_depends "libreadline6-dev"
-end
+build_depends "libreadline-dev"
 build_depends "libssl-dev"
 build_depends "libtool"
 build_depends "libyaml-dev"
@@ -45,12 +39,14 @@ build_depends "zlib1g-dev"
 build_depends "rustc"
 
 depends "libc6"
-if codename == "focal"
+if codename == "jammy"
+  depends "libffi8"
+elsif codename == "focal"
   depends "libffi7"
 else
   depends "libffi6"
 end
-if codename == "focal"
+if codename == "focal" || codename == "jammy"
   depends "libgdbm6"
 elsif codename == "bionic"
   depends "libgdbm5"
@@ -58,7 +54,7 @@ else
   depends "libgdbm3"
 end
 depends "libgmp10"
-if codename == "focal"
+if codename == "focal" || codename == "jammy"
   depends "libreadline8"
 elsif codename == "bionic"
   depends "libreadline7"
