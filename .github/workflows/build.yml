@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [bionic, focal]
+        os: [bionic, focal, jammy]
         location: ["", "-usr-local"]
 
     steps:
