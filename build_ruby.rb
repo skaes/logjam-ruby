@@ -12,9 +12,9 @@ iteration i
 
 vendor "skaes@railsexpress.de"
 
-patchlevel = 185
+patchlevel = 0
 source "https://railsexpress.de/downloads/ruby-#{version}-p#{patchlevel}.tar.gz",
-       checksum: 'a2aa2a58cccde60988171b5fea17058ab045d79c9458852d536b0c1db55f0848'
+       checksum: '3766d9c92306737b9dceff32d2e8ca7d66af122d3d6aa7ec2f95299496efc6db'
 
 build_depends "autoconf"
 build_depends "automake"
@@ -42,6 +42,7 @@ build_depends "patch"
 build_depends "pkg-config"
 build_depends "ruby"
 build_depends "zlib1g-dev"
+build_depends "rustc"
 
 depends "libc6"
 if codename == "focal"
@@ -72,7 +73,7 @@ add "gemrc", ".gemrc"
 
 run "autoconf"
 run "./configure", "--prefix=#{prefix}", "--with-opt-dir=#{prefix}",
-     "--with-out-ext=tcl", "--with-out-ext=tk", "--disable-install-doc", "--enable-shared"
+     "--with-out-ext=tcl", "--with-out-ext=tk", "--disable-install-doc", "--enable-shared", "--enable-yjit"
 run "make", "-j4"
 run "make", "install"
 run "mkdir", "-p", "#{prefix}/etc"
