@@ -46,6 +46,7 @@ elsif codename == "focal"
 else
   depends "libffi6"
 end
+
 if codename == "focal" || codename == "jammy"
   depends "libgdbm6"
 elsif codename == "bionic"
@@ -53,7 +54,9 @@ elsif codename == "bionic"
 else
   depends "libgdbm3"
 end
+
 depends "libgmp10"
+
 if codename == "focal" || codename == "jammy"
   depends "libreadline8"
 elsif codename == "bionic"
@@ -61,8 +64,14 @@ elsif codename == "bionic"
 else
   depends "libreadline6"
 end
+
 depends "libyaml-0-2"
-depends "openssl"
+
+if codename == "jammy"
+  depends "libssl3"
+else
+  depends "libssl1.1"
+end
 depends "zlib1g"
 
 add "gemrc", ".gemrc"
