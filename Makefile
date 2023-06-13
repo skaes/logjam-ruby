@@ -7,12 +7,32 @@ clean:
 	docker images | awk '/none|fpm-(fry|dockery)/ {print $$3;}' | xargs docker rmi
 
 PACKAGES:=package-jammy package-jammy-usr-local package-focal package-focal-usr-local package-bionic package-bionic-usr-local
-.PHONY: packages $(PACKAGES)
+.PHONY: packages $(PACKAGES) pull pull-jammy pull-focal pull-bionic
+
+ARCH := amd64
+
+ifeq ($(ARCH),)
+PLATFORM :=
+LIBARCH :=
+else
+PLATFORM := --platform $(ARCH)
+LIBARCH := $(ARCH:arm64=arm64v8)/
+endif
 
 packages: $(PACKAGES)
 
+pull: pull-jammy pull-focal pull-bionic
+
+pull-jammy:
+	docker pull $(LIBARCH)ubuntu:jammy
+pull-focal:
+	docker pull $(LIBARCH)ubuntu:focal
+pull-bionic:
+	docker pull $(LIBARCH)ubuntu:bionic
+
+
 define build-package
-  LOGJAM_PREFIX=$(2) RUBYOPT='-W0' bundle exec fpm-fry cook --update=always ubuntu:$(1) build_ruby.rb
+  LOGJAM_PREFIX=$(2) RUBYOPT='-W0' bundle exec fpm-fry cook $(PLATFORM) --update=always $(LIBARCH)ubuntu:$(1) build_ruby.rb
   mkdir -p packages/ubuntu/$(1) && mv *.deb packages/ubuntu/$(1)
 endef
 
