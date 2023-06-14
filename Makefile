@@ -56,8 +56,8 @@ LOGJAM_PACKAGE_USER:=uploader
 publish: publish-jammy publish-focal publish-bionic publish-jammy-usr-local publish-focal-usr-local publish-bionic-usr-local
 
 VERSION:=$(shell cat VERSION)
-PACKAGE_NAME:=logjam-ruby_$(VERSION)_amd64.deb
-PACKAGE_NAME_USR_LOCAL:=railsexpress-ruby_$(VERSION)_amd64.deb
+PACKAGE_NAME:=logjam-ruby_$(VERSION)_$(ARCH).deb
+PACKAGE_NAME_USR_LOCAL:=railsexpress-ruby_$(VERSION)_$(ARCH).deb
 
 define upload-package
 @if ssh $(LOGJAM_PACKAGE_USER)@$(LOGJAM_PACKAGE_HOST) debian-package-exists $(1) $(2); then\
