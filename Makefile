@@ -7,12 +7,32 @@ clean:
 	docker images | awk '/none|fpm-(fry|dockery)/ {print $$3;}' | xargs docker rmi
 
 PACKAGES:=package-jammy package-jammy-usr-local package-focal package-focal-usr-local package-bionic package-bionic-usr-local
-.PHONY: packages $(PACKAGES)
+.PHONY: packages $(PACKAGES) pull pull-jammy pull-focal pull-bionic
+
+ARCH := amd64
+
+ifeq ($(ARCH),)
+PLATFORM :=
+LIBARCH :=
+else
+PLATFORM := --platform $(ARCH)
+LIBARCH := $(ARCH:arm64=arm64v8)/
+endif
 
 packages: $(PACKAGES)
 
+pull: pull-jammy pull-focal pull-bionic
+
+pull-jammy:
+	docker pull $(LIBARCH)ubuntu:jammy
+pull-focal:
+	docker pull $(LIBARCH)ubuntu:focal
+pull-bionic:
+	docker pull $(LIBARCH)ubuntu:bionic
+
+
 define build-package
-  LOGJAM_PREFIX=$(2) RUBYOPT='-W0' bundle exec fpm-fry cook --update=always ubuntu:$(1) build_ruby.rb
+  LOGJAM_PREFIX=$(2) RUBYOPT='-W0' bundle exec fpm-fry cook $(PLATFORM) --update=always $(LIBARCH)ubuntu:$(1) build_ruby.rb
   mkdir -p packages/ubuntu/$(1) && mv *.deb packages/ubuntu/$(1)
 endef
 
@@ -36,8 +56,8 @@ LOGJAM_PACKAGE_USER:=uploader
 publish: publish-jammy publish-focal publish-bionic publish-jammy-usr-local publish-focal-usr-local publish-bionic-usr-local
 
 VERSION:=$(shell cat VERSION)
-PACKAGE_NAME:=logjam-ruby_$(VERSION)_amd64.deb
-PACKAGE_NAME_USR_LOCAL:=railsexpress-ruby_$(VERSION)_amd64.deb
+PACKAGE_NAME:=logjam-ruby_$(VERSION)_$(ARCH).deb
+PACKAGE_NAME_USR_LOCAL:=railsexpress-ruby_$(VERSION)_$(ARCH).deb
 
 define upload-package
 @if ssh $(LOGJAM_PACKAGE_USER)@$(LOGJAM_PACKAGE_HOST) debian-package-exists $(1) $(2); then\
