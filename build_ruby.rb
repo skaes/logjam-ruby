@@ -12,9 +12,9 @@ iteration i
 
 vendor "skaes@railsexpress.de"
 
-patchlevel = 53
+patchlevel = 0
 source "https://railsexpress.de/downloads/ruby-#{version}-p#{patchlevel}.tar.gz",
-       checksum: 'dd922ec285b19b7a240395f230765e6e26b729d64b4d669442f080864943090b'
+       checksum: '57de64d8ac8e6459a14f2c3fdfca85f68286bcf82889a8527c24449f981938d9'
 
 build_depends "autoconf"
 build_depends "automake"
