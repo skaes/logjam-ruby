@@ -6,8 +6,8 @@ clean:
 	docker ps -a | awk '/Exited/ {print $$1;}' | xargs docker rm
 	docker images | awk '/none|fpm-(fry|dockery)/ {print $$3;}' | xargs docker rmi
 
-PACKAGES:=package-jammy package-jammy-usr-local package-focal package-focal-usr-local package-bionic package-bionic-usr-local
-.PHONY: packages $(PACKAGES) pull pull-jammy pull-focal pull-bionic
+PACKAGES:=package-jammy package-jammy-usr-local package-focal package-focal-usr-local
+.PHONY: packages $(PACKAGES) pull pull-jammy pull-focal
 
 ARCH := amd64
 
@@ -21,14 +21,12 @@ endif
 
 packages: $(PACKAGES)
 
-pull: pull-jammy pull-focal pull-bionic
+pull: pull-jammy pull-focal
 
 pull-jammy:
 	docker pull $(LIBARCH)ubuntu:jammy
 pull-focal:
 	docker pull $(LIBARCH)ubuntu:focal
-pull-bionic:
-	docker pull $(LIBARCH)ubuntu:bionic
 
 
 define build-package
@@ -40,20 +38,16 @@ package-jammy:
 	$(call build-package,jammy,/opt/logjam)
 package-focal:
 	$(call build-package,focal,/opt/logjam)
-package-bionic:
-	$(call build-package,bionic,/opt/logjam)
 package-jammy-usr-local:
 	$(call build-package,jammy,/usr/local)
 package-focal-usr-local:
 	$(call build-package,focal,/usr/local)
-package-bionic-usr-local:
-	$(call build-package,bionic,/usr/local)
 
 LOGJAM_PACKAGE_HOST:=railsexpress.de
 LOGJAM_PACKAGE_USER:=uploader
 
-.PHONY: publish publish-jammy publish-focal publish-bionic  publish-jammy-usr-local publish-focal-usr-local publish-bionic-usr-local
-publish: publish-jammy publish-focal publish-bionic publish-jammy-usr-local publish-focal-usr-local publish-bionic-usr-local
+.PHONY: publish publish-jammy publish-focal publish-jammy-usr-local publish-focal-usr-local
+publish: publish-jammy publish-focal publish-jammy-usr-local publish-focal-usr-local
 
 VERSION:=$(shell cat VERSION)
 PACKAGE_NAME:=logjam-ruby_$(VERSION)_$(ARCH).deb
@@ -75,14 +69,8 @@ publish-jammy:
 publish-focal:
 	$(call upload-package,focal,$(PACKAGE_NAME))
 
-publish-bionic:
-	$(call upload-package,bionic,$(PACKAGE_NAME))
-
 publish-jammy-usr-local:
 	$(call upload-package,jammy,$(PACKAGE_NAME_USR_LOCAL))
 
 publish-focal-usr-local:
 	$(call upload-package,focal,$(PACKAGE_NAME_USR_LOCAL))
-
-publish-bionic-usr-local:
-	$(call upload-package,bionic,$(PACKAGE_NAME_USR_LOCAL))

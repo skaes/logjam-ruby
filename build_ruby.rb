@@ -49,8 +49,6 @@ end
 
 if codename == "focal" || codename == "jammy"
   depends "libgdbm6"
-elsif codename == "bionic"
-  depends "libgdbm5"
 else
   depends "libgdbm3"
 end
@@ -59,8 +57,6 @@ depends "libgmp10"
 
 if codename == "focal" || codename == "jammy"
   depends "libreadline8"
-elsif codename == "bionic"
-  depends "libreadline7"
 else
   depends "libreadline6"
 end
