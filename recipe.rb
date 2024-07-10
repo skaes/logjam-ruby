@@ -39,7 +39,7 @@ build_depends "zlib1g-dev"
 build_depends "rustc"
 
 depends "libc6"
-if codename == "jammy"
+if codename == "jammy" || codename == "noble"
   depends "libffi8"
 elsif codename == "focal"
   depends "libffi7"
@@ -47,7 +47,9 @@ else
   depends "libffi6"
 end
 
-if codename == "focal" || codename == "jammy"
+if codename == "noble"
+  depends "libgdbm6t64"
+elsif codename == "focal" || codename == "jammy"
   depends "libgdbm6"
 else
   depends "libgdbm3"
@@ -55,7 +57,9 @@ end
 
 depends "libgmp10"
 
-if codename == "focal" || codename == "jammy"
+if codename == "noble"
+  depends "libreadline8t64"
+elsif codename == "focal" || codename == "jammy" || codename == "noble"
   depends "libreadline8"
 else
   depends "libreadline6"
@@ -63,7 +67,9 @@ end
 
 depends "libyaml-0-2"
 
-if codename == "jammy"
+if codename == "noble"
+  depends "libssl3t64"
+elsif codename == "jammy"
   depends "libssl3"
 else
   depends "libssl1.1"
@@ -72,7 +78,7 @@ depends "zlib1g"
 
 add "gemrc", ".gemrc"
 
-if codename == "jammy"
+if codename == "jammy" || codename == "noble"
   run "autoreconf", "-i"
 else
   run "autoconf"
