@@ -45,7 +45,7 @@ LOGJAM_PACKAGE_USER:=uploader
 .PHONY: publish publish-noble publish-jammy publish-focal publish-noble-usr-local publish-jammy-usr-local publish-focal-usr-local
 publish: publish-noble publish-jammy publish-focal publish-noble-usr-local publish-jammy-usr-local publish-focal-usr-local
 
-VERSION:=$(shell cat VERSION)
+VERSION:=$(shell cat version.yml | grep package: | cut -d: -f2 | tr -d '[:space:]')
 PACKAGE_NAME:=logjam-ruby_$(VERSION)_$(ARCH).deb
 PACKAGE_NAME_USR_LOCAL:=railsexpress-ruby_$(VERSION)_$(ARCH).deb
 

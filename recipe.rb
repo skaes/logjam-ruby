@@ -6,15 +6,16 @@ else
   name "railsexpress-ruby"
 end
 
-v, i = File.read(File.expand_path(__dir__)+"/VERSION").chomp.split('-')
+version_info = YAML::load_file(File.expand_path(__dir__)+"/version.yml")
+package, patchlevel, checksum, rubygems_version = version_info.values_at(*%w[package patchlevel checksum rubygems_version])
+
+v, i = package.split('-')
 version v
 iteration i
 
 vendor "skaes@railsexpress.de"
 
-patchlevel = 55
-source "https://railsexpress.de/downloads/ruby-#{version}-p#{patchlevel}.tar.gz",
-       checksum: 'e8ebf5c451c0302a9e6e86b78cf2b7d2bbd57e1b8bf79e1587c2da96efd03a3e'
+source "https://railsexpress.de/downloads/ruby-#{version}-p#{patchlevel}.tar.gz", checksum: checksum
 
 build_depends "autoconf"
 build_depends "automake"
@@ -89,7 +90,7 @@ run "make", "-j4"
 run "make", "install"
 run "mkdir", "-p", "#{prefix}/etc"
 run "cp", ".gemrc", "#{prefix}/etc/gemrc"
-run "#{prefix}/bin/gem", "update", "-q", "--system", "3.5.10"
+run "#{prefix}/bin/gem", "update", "-q", "--system", rubygems_version
 
 plugin "exclude"
 
