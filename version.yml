@@ -1,4 +1,4 @@
 package: "3.3.5-1"
 patchlevel: "100"
 checksum: "ba041ce5be0f6ce0a0e8db3d008a316d481561491fcb3752024e12e005726316"
-rubygems_version: "3.5.21"
+rubygems_version: "3.5.20"
