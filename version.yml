@@ -1,4 +1,4 @@
-package: "3.3.8-1"
-patchlevel: "144"
-checksum: "b145e8339a11a98833e23dcabe7845b619c2064694a1f9784b4a01e2b31d911d"
+package: "3.3.9-1"
+patchlevel: "170"
+checksum: "1a72b0e1d230f0dd4f259451c10fdffa1c84c3f29ce42a3930fafd606a6df08c"
 rubygems_version: "3.5.22"
