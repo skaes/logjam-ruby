@@ -1,7 +1,7 @@
 # logjam-ruby
 
-Build ruby package for logjam pipeline. Supports Ubuntu Focal, Jammy
-and Noble. Provides two different package flavors:
+Build ruby package for logjam pipeline. Supports Ubuntu Jammy and
+Noble. Provides two different package flavors:
 `logjam-ruby_x.x.x_x_amd64.deb` installs in `/opt/logjam` and
 `railsexpress-ruby_x.x.x-x_amd64.deb` installs in `/usr/local`.
 

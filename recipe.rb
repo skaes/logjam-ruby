@@ -40,50 +40,34 @@ build_depends "zlib1g-dev"
 build_depends "rustc"
 
 depends "libc6"
-if codename == "jammy" || codename == "noble"
-  depends "libffi8"
-elsif codename == "focal"
-  depends "libffi7"
-else
-  depends "libffi6"
-end
+depends "libffi8"
 
 if codename == "noble"
   depends "libgdbm6t64"
-elsif codename == "focal" || codename == "jammy"
-  depends "libgdbm6"
 else
-  depends "libgdbm3"
+  depends "libgdbm6"
 end
 
 depends "libgmp10"
 
 if codename == "noble"
   depends "libreadline8t64"
-elsif codename == "focal" || codename == "jammy" || codename == "noble"
-  depends "libreadline8"
 else
-  depends "libreadline6"
+  depends "libreadline8"
 end
 
 depends "libyaml-0-2"
 
 if codename == "noble"
   depends "libssl3t64"
-elsif codename == "jammy"
-  depends "libssl3"
 else
-  depends "libssl1.1"
+  depends "libssl3"
 end
 depends "zlib1g"
 
 add "gemrc", ".gemrc"
 
-if codename == "jammy" || codename == "noble"
-  run "autoreconf", "-i"
-else
-  run "autoconf"
-end
+run "autoreconf", "-i"
 run "./configure", "--prefix=#{prefix}", "--with-opt-dir=#{prefix}",
      "--with-out-ext=tcl", "--with-out-ext=tk", "--disable-install-doc", "--enable-shared", "--enable-yjit"
 run "make", "-j4"
